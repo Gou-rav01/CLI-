@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require './csv_processor'
+
+def init
+  if ARGV.include?('--help')
+    puts 'Usage:'
+    puts './cli < input.csv # parses input.csv and prints output to STDOUT'
+    puts './cli input.csv > output.csv # parses input.csv and produces output.csv as the result'
+    puts './cli --help # prints help'
+    exit
+  end
+  
+  if ARGV.length == 1
+    ARGV.each do |file_name|
+      if File.exist?(file_name)
+        @input_data = File.open(file_name).read
+      else
+        puts "File not found: #{file_name}"
+        exit 1
+      end
+    end
+  else
+    @input_data = $stdin.read
+  end
+   
+  #  Process CSV file data
+  data = CsvProcessor.new.process_csv(@input_data)
+
+  # STD output
+  CSV($stdout, write_headers: true, headers:  data[:headers]) do |csv|
+    data[:output_rows].each { |row| csv << row }
+  end
+end
+
+init
