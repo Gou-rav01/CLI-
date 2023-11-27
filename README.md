@@ -19,11 +19,9 @@ To launch the application, follow these steps:
 2. Run `gem install geocoder`
 3. Run`gem  install titleize`
 
-Then, open your browser and navigate to http://localhost:3000 to access the application.
-
-# .env
-BOT_OAUTH_TOKEN=xoxb-6100547122564-6112614568513-2faAi2gtuRtzJKex3Mv3zFrk
-SLACK_BASE_URL=https://slack.com/api
-DATABASE_URL=
+Then you can  able to run CLI commands
+  1. ./cli < input.csv 
+  2. ./cli input.csv > output.csv
+  3. ./cli --help 
 ```
 
